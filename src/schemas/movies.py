@@ -48,7 +48,7 @@ class MovieListResponseSchema(BaseModel):
     """Paginated list of movies."""
 
     movies: List[MovieListItemSchema]
-    prev_page: str
-    next_page: str
+    prev_page: Optional[str] = None
+    next_page: Optional[str] = None
     total_pages: int
     total_items: int
