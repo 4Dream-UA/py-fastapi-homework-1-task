@@ -37,14 +37,8 @@ async def get_movies(
     if not movies:
         raise HTTPException(status_code=404, detail="No movies found.")
 
-    prev_page = (
-        f"/theater/movies/?page={page - 1}&per_page={per_page}" if page > 1 else None
-    )
-    next_page = (
-        f"/theater/movies/?page={page + 1}&per_page={per_page}"
-        if page < total_pages
-        else None
-    )
+    prev_page = f"/theater/movies/?page={max(page - 1, 1)}&per_page={per_page}"
+    next_page = f"/theater/movies/?page={min(page + 1, total_pages)}&per_page={per_page}"
 
     return MovieListResponseSchema(
         movies=movies,
